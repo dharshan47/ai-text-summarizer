@@ -29,7 +29,11 @@ const App = () => {
       const res = await window?.puter?.ai?.chat(
         `Please summarize this ${text}`
       );
-      setSummarize(res?.message?.content);
+      if (typeof res === "string") {
+      setSummarize(res);
+    } else {
+      setSummarize(res?.message?.content || "");
+    }
     } catch (err) {
       if (err instanceof Error) {
         setError(err.message || "Something Went Wrong");
