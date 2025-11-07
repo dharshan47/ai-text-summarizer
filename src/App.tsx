@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import puter from "@heyputer/puter.js";
+
 
 const App = () => {
   const [text, setText] = useState("");
@@ -10,9 +12,9 @@ const App = () => {
   useEffect(() => {
     const checkReady = setInterval(() => {
       if (
-        window.puter &&
-        window.puter.ai &&
-        typeof window.puter.ai.chat === "function"
+        puter &&
+        puter.ai &&
+        typeof puter.ai.chat === "function"
       ) {
         setAiReady(true);
         clearInterval(checkReady);
@@ -26,7 +28,7 @@ const App = () => {
     setSummarize("");
     setError("");
     try {
-      const res = await window?.puter?.ai?.chat(
+      const res = await puter.ai.chat(
         `Please summarize this ${text}`
       );
       if (typeof res === "string") {
